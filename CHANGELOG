@@ -9,24 +9,53 @@ Breaking API Changes
     None.
 
 New Features
-    TODO
+    Types
+      thrust::transform_output_iterator 
 
 New Examples
-    TODO
+    transform_output_iterator demonstrates use of a transform_output_iterator - 
+    a new fancy output iterator which transform output before storing result the memory
 
 Other Enhancements
-    If C++11 support is enabled, functors do not have to inherit from thrust::unary_function/thrust::binary_function anymore when using them with thrust::transform_iterator.
+    If C++11 support is enabled, functors do not have to inherit from thrust::unary_function/thrust::binary_function 
+    anymore when using them with thrust::transform_iterator.
     The performance of thrust::unique* is improved.
+    If C++11 support is enabled, the move constructor and move assignment operator have been implemented
+    for host_vector,device_vector,cpp::vector,cuda::vector,omp::vector and tbb::vector.
 
 Bug Fixes
-    TODO
+    calculating sin(complex<double>) no longer has precision loss to float
 
 Known Issues
     TODO
 
 Acknowledgments
-    Thanks to Manuel Schiller for contributing a C++11 based enhancement regarding the deduction of functor return types and improving the performance of thrust::unique. 
+    Thanks to Manuel Schiller for contributing a C++11 based enhancement regarding the deduction of 
+    functor return types, improving the performance of thrust::unique and implementing transform_output_iterator
+    Thanks to Thibault Notargiacomo for the implementation of move semantics for the vector_base based class.
+
+#######################################
+#           Thrust v1.8.3-2           #
+#######################################
+
+Summary
+    Small bug fixes
+    Introduces THRUST_PATCH_NUMBER macro, defined in thrust/version.h, to track bug fixes after a new CUDA release.
+
+New Examples
+    range_view demonstrates use of a view: a non-owning wrapper for an iterator range with a container-like interface
+
+Bug Fixes
+    copy_if, set_operations, reduce_by_key, and their ilks access temporary data in a user provided stream instead of a default one
+    {min,max,minmax}_element can now accept raw device pointer with device execution policy
+    If C++11 support is enabled, functors do not have to inherit from thrust::unary_function/thrust::binary_function
+    anymore when using them with thrust::transform_iterator.
+    clear() operations on vector types no longer requires the element type to have a default constructor
+
     
+
+Known Issues
+    TODO
 
 #######################################
 #           Thrust v1.8.2             #
@@ -36,6 +65,7 @@ Summary
     Small bug fixes
 
 Bug Fixes
+    Avoid warnings and errors concerning user functions called from __host__ __device__ functions
     #632 CUDA set_intersection_by_key error
     #651 thrust::copy between host & device is not interoperable with thrust::cuda::par.on(stream)
     #664 CUDA for_each ignores execution policy's stream
